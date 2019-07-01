@@ -7,7 +7,6 @@ import me.shansen.EggCatcher.listeners.EggCatcherPlayerListener;
 import net.milkbowl.vault.economy.Economy;
 import com.gmail.fortyeffsmc.eggcatcher.CommandCompleter;
 import com.gmail.fortyeffsmc.eggcatcher.CommandHandler;
-import com.gmail.fortyeffsmc.eggcatcher.TeleportBlocker;
 
 import org.bukkit.Server;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -40,7 +39,6 @@ extends JavaPlugin {
 		this.getCommand("eggex").setExecutor(new CommandHandler());
         pm.registerEvents((Listener)playerListener, (Plugin)this);
         pm.registerEvents((Listener)entityListener, (Plugin)this);
-        pm.registerEvents(new TeleportBlocker(), this);
         
         if (this.getServer().getPluginManager().getPlugin("Vault") != null && (economyProvider = this.getServer().getServicesManager().getRegistration(Economy.class)) != null) {
             economy = (Economy)economyProvider.getProvider();

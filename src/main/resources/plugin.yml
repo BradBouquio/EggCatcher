@@ -56,6 +56,9 @@ permissions:
     eggcatcher.free:
         description: Makes catching a mob free.
         default: false
+    eggcatcher.reload:
+        description: Gives the ability to reload the plugin
+        default: op
 commands:
    eggex:
       description: The main command

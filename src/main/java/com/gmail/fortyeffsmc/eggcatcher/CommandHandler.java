@@ -21,6 +21,10 @@ public class CommandHandler implements CommandExecutor {
 		try {
 			switch(args[0].toLowerCase()) {
 				case "reload":
+					if(player != null && !player.hasPermission("eggcatcher.reload")) {
+						player.sendMessage("You don't have permission to do that!");
+						break;
+					}
 					EggCatcher.plugin.reloadConfig();
 					EggCatcher.plugin.getCommand("eggex").setTabCompleter(new CommandCompleter());
 					EggCatcher.plugin.getCommand("eggex").setExecutor(new CommandHandler());
