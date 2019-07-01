@@ -1,8 +1,8 @@
 name: EggCatcher
-version: 3.1
+version: 4.2
 description: This plugin allows you to catch mobs in eggs.
 author: shansen
-
+api-version: 1.13
 main: me.shansen.EggCatcher.EggCatcher
 
 permissions:
@@ -56,3 +56,7 @@ permissions:
     eggcatcher.free:
         description: Makes catching a mob free.
         default: false
+commands:
+   eggex:
+      description: The main command
+      usage: /eggex
