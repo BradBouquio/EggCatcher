@@ -81,61 +81,7 @@ implements Listener {
     JavaPlugin plugin;
     private File captureLogFile;
     private EggCatcherLogger captureLogger;
-    private Map<String,String> mobMap = new HashMap<>();
     
-    {
-    	mobMap.put("BAT","BAT_SPAWN_EGG");
-    	mobMap.put("BLAZE","BLAZE_SPAWN_EGG");
-    	mobMap.put("CAVE_SPIDER","CAVE_SPIDER_SPAWN_EGG");
-    	mobMap.put("CHICKEN","CHICKEN_SPAWN_EGG");
-    	mobMap.put("COD","COD_SPAWN_EGG");
-    	mobMap.put("COW","COW_SPAWN_EGG");
-    	mobMap.put("CREEPER","CREEPER_SPAWN_EGG");
-    	mobMap.put("DOLPHIN","DOLPHIN_SPAWN_EGG");
-    	mobMap.put("DONKEY","DONKEY_SPAWN_EGG");
-    	mobMap.put("DROWNED","DROWNED_SPAWN_EGG");
-    	mobMap.put("ELDER_GUARDIAN","ELDER_GUARDIAN_SPAWN_EGG");
-    	mobMap.put("ENDERMAN","ENDERMAN_SPAWN_EGG");
-    	mobMap.put("ENDERMITE","ENDERMITE_SPAWN_EGG");
-    	mobMap.put("EVOKER","EVOKER_SPAWN_EGG");
-    	mobMap.put("GHAST","GHAST_SPAWN_EGG");
-    	mobMap.put("GUARDIAN","GUARDIAN_SPAWN_EGG");
-    	mobMap.put("HORSE","HORSE_SPAWN_EGG");
-    	mobMap.put("HUSK","HUSK_SPAWN_EGG");
-    	mobMap.put("VINDICATOR","VINDICATOR_SPAWN_EGG");
-    	mobMap.put("LLAMA","LLAMA_SPAWN_EGG");
-    	mobMap.put("MAGMA_CUBE","MAGMA_CUBE_SPAWN_EGG");
-    	mobMap.put("MUSHROOM_COW","MOOSHROOM_SPAWN_EGG");
-    	mobMap.put("MULE","MULE_SPAWN_EGG");
-    	mobMap.put("OCELOT","OCELOT_SPAWN_EGG");
-    	mobMap.put("PARROT","PARROT_SPAWN_EGG");
-    	mobMap.put("PHANTOM","PHANTOM_SPAWN_EGG");
-    	mobMap.put("PIG","PIG_SPAWN_EGG");
-    	mobMap.put("POLAR_BEAR","POLAR_BEAR_SPAWN_EGG");
-    	mobMap.put("PUFFERFISH","PUFFERFISH_SPAWN_EGG");
-    	mobMap.put("RABBIT","RABBIT_SPAWN_EGG");
-    	mobMap.put("SALMON","SALMON_SPAWN_EGG");
-    	mobMap.put("SHEEP","SHEEP_SPAWN_EGG");
-    	mobMap.put("SHULKER","SHULKER_SPAWN_EGG");
-    	mobMap.put("SILVERFISH","SILVERFISH_SPAWN_EGG");
-    	mobMap.put("SKELETON_HORSE","SKELETON_HORSE_SPAWN_EGG");
-    	mobMap.put("SKELETON","SKELETON_SPAWN_EGG");
-    	mobMap.put("SLIME","SLIME_SPAWN_EGG");
-    	mobMap.put("SPIDER","SPIDER_SPAWN_EGG");
-    	mobMap.put("SQUID","SQUID_SPAWN_EGG");
-    	mobMap.put("STRAY","STRAY_SPAWN_EGG");
-    	mobMap.put("TROPICAL_FISH","TROPICAL_FISH_SPAWN_EGG");
-    	mobMap.put("TURTLE","TURTLE_SPAWN_EGG");
-    	mobMap.put("VEX","VEX_SPAWN_EGG");
-    	mobMap.put("VILLAGER","VILLAGER_SPAWN_EGG");
-    	mobMap.put("WITCH","WITCH_SPAWN_EGG");
-    	mobMap.put("WITHER_SKELETON","WITHER_SKELETON_SPAWN_EGG");
-    	mobMap.put("WOLF","WOLF_SPAWN_EGG");
-    	mobMap.put("ZOMBIE_HORSE","ZOMBIE_HORSE_SPAWN_EGG");
-    	mobMap.put("PIG_ZOMBIE","ZOMBIE_PIGMAN_SPAWN_EGG");
-    	mobMap.put("ZOMBIE","ZOMBIE_SPAWN_EGG");
-    	mobMap.put("ZOMBIE_VILLAGER","ZOMBIE_VILLAGER_SPAWN_EGG");
-    }
 
     public EggCatcherEntityListener(JavaPlugin plugin) {
     	catchListener = this;
@@ -318,7 +264,8 @@ implements Listener {
         }
         
         
-        ItemStack eggStack = new ItemStack(Material.matchMaterial(mobMap.get(entity.getType().toString().toUpperCase())), 1);
+        
+        ItemStack eggStack = new ItemStack(Material.matchMaterial(EggCatcher.plugin.mobMap.get(entity.getType().toString().toUpperCase())), 1);
         String customName = ((LivingEntity)entity).getCustomName();
         
         
