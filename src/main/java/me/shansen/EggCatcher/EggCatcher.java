@@ -8,6 +8,8 @@ import java.util.Map;
 import me.shansen.EggCatcher.listeners.EggCatcherEntityListener;
 import me.shansen.EggCatcher.listeners.EggCatcherPlayerListener;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
+
 import com.gmail.fortyeffsmc.eggcatcher.CommandCompleter;
 import com.gmail.fortyeffsmc.eggcatcher.CommandHandler;
 
@@ -55,9 +57,11 @@ extends JavaPlugin {
         	}
         }
         
-        if (this.getServer().getPluginManager().getPlugin("Vault") != null && (economyProvider = this.getServer().getServicesManager().getRegistration(Economy.class)) != null) {
-            economy = (Economy)economyProvider.getProvider();
-        }
+        economyProvider = this.getServer().getServicesManager().getRegistration(Economy.class);
+        //if (this.getServer().getPluginManager().getPlugin("Vault") != null && economyProvider != null) {
+        //economy = (Economy)economyProvider.getProvider();
+        setupEconomy();
+        //}
     }
 
     public void CheckConfigurationFile() {
@@ -68,5 +72,17 @@ extends JavaPlugin {
             this.saveResource("config.yml", true);
             this.reloadConfig();
         }
+        
+
+    }
+    
+    private boolean setupEconomy()
+    {
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+        if (economyProvider != null) {
+            economy = economyProvider.getProvider();
+        }
+
+        return (economy != null);
     }
 }

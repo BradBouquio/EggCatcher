@@ -119,7 +119,7 @@ implements Listener {
      * Enabled aggressive block sorting
      * Lifted jumps to return sites
      */
-    @EventHandler(ignoreCancelled=true, priority=EventPriority.HIGH)
+    @EventHandler(ignoreCancelled=false, priority=EventPriority.HIGHEST)
     public void onEntityHitByEgg(EntityDamageEvent event) {
     	entity = event.getEntity();
     	if(!checkToProceed(event)) return;
@@ -131,6 +131,7 @@ implements Listener {
         if(!catchByPunch && !(damageEvent.getDamager() instanceof Egg)) {
         	return;
         }
+        event.setCancelled(true);
         
         if (!this.spawnChickenOnFail && !catchByPunch) {
             EggCatcher.eggs.add(egg);
@@ -177,8 +178,9 @@ implements Listener {
             
             if (this.useCatchChance) {
                 double catchChance = this.config.getDouble("CatchChance." + entityFriendlyName);
-                
-                if (Math.random() * 100.0 <= catchChance) {
+                double roll = Math.random() * 100.0D;
+                player.sendMessage(String.valueOf(roll));
+                if (roll <= catchChance) {
                 	
                     if (this.catchChanceSuccessMessage.length() > 0) {
                         player.sendMessage(this.catchChanceSuccessMessage);
@@ -350,5 +352,10 @@ implements Listener {
     	for(Player player : Bukkit.getOnlinePlayers()) {
     		player.sendMessage(string);
     	}
+    }
+    
+    private double round (double value, int precision) {
+    	int scale = (int) Math.pow(10, precision);
+    	return (double) Math.round(value * scale);
     }
 }
