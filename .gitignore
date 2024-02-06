@@ -14,3 +14,4 @@ target
 *.ipr
 *.iws
 dependency-reduced-pom.xml
+EggCatcher.code-workspace

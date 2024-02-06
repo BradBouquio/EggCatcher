@@ -1,52 +1,27 @@
 package me.shansen.EggCatcher.listeners;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.gmail.fortyeffsmc.eggcatcher.CatchChance;
+import com.gmail.fortyeffsmc.eggcatcher.ColorMatcher;
 import me.shansen.EggCatcher.EggCatcher;
 import me.shansen.EggCatcher.EggCatcherLogger;
 import me.shansen.EggCatcher.events.EggCaptureEvent;
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Server;
-import org.bukkit.World;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Ageable;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Horse;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Pig;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Sheep;
-import org.bukkit.entity.Tameable;
-import org.bukkit.entity.Villager;
+import org.bukkit.entity.*;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.projectiles.ProjectileSource;
+
+import java.io.File;
 
 public class EggCatcherEntityListener
 implements Listener {
@@ -66,6 +41,8 @@ implements Listener {
     private String catchChanceFailMessage;
     private String healthPercentageFailMessage;
     private String vaultTargetBankAccount;
+    private String specialEggName;
+    private String successMessage;
     private boolean spawnChickenOnFail;
     private boolean spawnChickenOnSuccess;
     private boolean deleteVillagerInventoryOnCatch;
@@ -105,10 +82,12 @@ implements Listener {
         this.nonPlayerCatching = this.config.getBoolean("NonPlayerCatching", true);
         this.catchChanceSuccessMessage = this.config.getString("Messages.CatchChanceSuccess");
         this.catchChanceFailMessage = this.config.getString("Messages.CatchChanceFail");
+        this.successMessage = this.plugin.getConfig().getString("Messages.Success");
         this.healthPercentageFailMessage = this.config.getString("Messages.HealthPercentageFail");
         this.preventCatchingBabyAnimals = this.config.getBoolean("PreventCatchingBabyAnimals", true);
         this.preventCatchingTamedAnimals = this.config.getBoolean("PreventCatchingTamedAnimals", true);
         this.preventCatchingShearedSheeps = this.config.getBoolean("PreventCatchingShearedSheeps", true);
+        //this.specialEggName = this.config.getString("SpecialEgg.Name", "");
         this.spawnChickenOnFail = this.config.getBoolean("SpawnChickenOnFail", true);
         this.spawnChickenOnSuccess = this.config.getBoolean("SpawnChickenOnSuccess", false);
         this.vaultTargetBankAccount = this.config.getString("VaultTargetBankAccount", "");
@@ -120,17 +99,19 @@ implements Listener {
      * Lifted jumps to return sites
      */
     @EventHandler(ignoreCancelled=false, priority=EventPriority.HIGHEST)
-    public void onEntityHitByEgg(EntityDamageEvent event) {
-    	entity = event.getEntity();
+    public void onEntityHitByEgg(EntityDamageByEntityEvent event) {
+        damageEvent = event;
+        entity = damageEvent.getEntity();
     	if(!checkToProceed(event)) return;
-    	
+
         double vaultCost = 0.0;
         String entityFriendlyName = entity.getType().toString();
-        
         catchByPunch = isCatchByPunch();
         if(!catchByPunch && !(damageEvent.getDamager() instanceof Egg)) {
         	return;
         }
+        if(!CatchChance.playerThrewSpecial(player.getDisplayName())) return;
+
         event.setCancelled(true);
         
         if (!this.spawnChickenOnFail && !catchByPunch) {
@@ -151,7 +132,7 @@ implements Listener {
             if (this.usePermissions && !player.hasPermission("eggcatcher.catch." + entityFriendlyName.toLowerCase().replace("_", ""))) {
                 player.sendMessage(this.config.getString("Messages.PermissionFail"));
                 if (this.looseEggOnFail) {
-                	if(catchByPunch) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+                	if(catchByPunch && player.getGameMode() != GameMode.CREATIVE) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
                 	return;
                 } else if (catchByPunch) return;
                 player.getInventory().addItem(new ItemStack[]{new ItemStack(Material.EGG, 1)});
@@ -161,13 +142,13 @@ implements Listener {
             
             
             if (this.useHealthPercentage && (healthPercentage = this.config.getDouble("HealthPercentage." + entityFriendlyName)) < (currentHealth * 100.0 / ((LivingEntity)entity).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())) {
-                
+
             	if (this.healthPercentageFailMessage.length() > 0) {
                     player.sendMessage(String.format(this.healthPercentageFailMessage, healthPercentage));
                 }
             	
                 if (this.looseEggOnFail) {
-                	if(catchByPunch) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+                	if(catchByPunch && player.getGameMode() != GameMode.CREATIVE) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
                 	return;
                 } else if (catchByPunch) return;
                 player.getInventory().addItem(new ItemStack[]{new ItemStack(Material.EGG, 1)});
@@ -177,23 +158,25 @@ implements Listener {
             
             
             if (this.useCatchChance) {
-                double catchChance = this.config.getDouble("CatchChance." + entityFriendlyName);
-                double roll = Math.random() * 100.0D;
-                player.sendMessage(String.valueOf(roll));
+                double catchChance = this.config.getDouble("CatchChance." + entityFriendlyName) * CatchChance.playerThrowMap.get(player.getDisplayName());
+
+                double roll = Math.random() * 100D;
                 if (roll <= catchChance) {
                 	
                     if (this.catchChanceSuccessMessage.length() > 0) {
-                        player.sendMessage(this.catchChanceSuccessMessage);
+                        player.sendMessage(ColorMatcher.translate(catchChanceSuccessMessage));
                     }
                     
                 } else {
                 	
                     if (this.catchChanceFailMessage.length() > 0) {
-                        player.sendMessage(this.catchChanceFailMessage);
+                        Player.Spigot spigotPlayer = player.spigot();
+                        spigotPlayer.sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ColorMatcher.translate(catchChanceFailMessage)));
+                        player.playSound(player.getLocation(), Sound.ENTITY_TURTLE_EGG_BREAK, 0.5f,2.0f);
                     }
                     
                     if (this.looseEggOnFail) {
-                    	if(catchByPunch) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+                    	if(catchByPunch && player.getGameMode() != GameMode.CREATIVE) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
                     	return;
                     } else if (catchByPunch) return;
                     player.getInventory().addItem(new ItemStack[]{new ItemStack(Material.EGG, 1)});
@@ -209,7 +192,7 @@ implements Listener {
                 if (!EggCatcher.economy.has(player, vaultCost)) {
                     player.sendMessage(String.format(this.config.getString("Messages.VaultFail"), vaultCost));
                     if (this.looseEggOnFail) {
-                    	if(catchByPunch) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+                    	if(catchByPunch && player.getGameMode() != GameMode.CREATIVE) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
                     	return;
                     } else if (catchByPunch) return;
                     player.getInventory().addItem(new ItemStack[]{new ItemStack(Material.EGG, 1)});
@@ -229,7 +212,7 @@ implements Listener {
                 if (!player.getInventory().containsAtLeast(itemStack, itemStack.getAmount())) {
                     player.sendMessage(String.format(this.config.getString("Messages.ItemCostFail"), String.valueOf(itemAmount)));
                     if (this.looseEggOnFail) {
-                    	if(catchByPunch) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+                    	if(catchByPunch && player.getGameMode() != GameMode.CREATIVE) player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
                     	return;
                     } else if (catchByPunch) return;
                     player.getInventory().addItem(new ItemStack[]{new ItemStack(Material.EGG, 1)});
@@ -252,7 +235,7 @@ implements Listener {
         }
         
         entity.remove();
-        if(catchByPunch) {
+        if(catchByPunch && player.getGameMode() != GameMode.CREATIVE) {
         	player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
         }
         
@@ -268,7 +251,7 @@ implements Listener {
         
         
         ItemStack eggStack = new ItemStack(Material.matchMaterial(EggCatcher.plugin.mobMap.get(entity.getType().toString().toUpperCase())), 1);
-        String customName = ((LivingEntity)entity).getCustomName();
+        String customName = ((LivingEntity)entity).getName();
         
         
         if (customName != null) {
@@ -294,7 +277,9 @@ implements Listener {
         }
         
         entity.getWorld().dropItem(entity.getLocation(), eggStack);
-        
+        player.playSound(player.getLocation(), Sound.ENTITY_WITHER_AMBIENT, 0.5f,2.0f);
+        player.sendMessage(ColorMatcher.translate(String.format(successMessage,entityFriendlyName.toLowerCase().replace("_", " "))));
+        CatchChance.playerThrowMap.remove(player.getDisplayName());
         if (!this.spawnChickenOnSuccess && !EggCatcher.eggs.contains((Object)egg)) {
             EggCatcher.eggs.add(egg);
         }
@@ -306,12 +291,7 @@ implements Listener {
     
     
     
-    public boolean checkToProceed(EntityDamageEvent event) {
-    	
-        if (event instanceof EntityDamageByEntityEvent) {
-        	damageEvent = (EntityDamageByEntityEvent)event;
-        } else return false;
-    	
+    public boolean checkToProceed(EntityDamageByEntityEvent event) {
         if (this.preventCatchingBabyAnimals && entity instanceof Ageable && !((Ageable)entity).isAdult()) {
         	return false;
         }
@@ -339,8 +319,11 @@ implements Listener {
         	if(damageEvent.getDamager().getType().toString().equals("PLAYER")) {
         		player = (Player) damageEvent.getDamager();
         		if(player.getInventory().getItemInMainHand().getType().toString().equals("EGG")) {
-            		catchByPunch = true;
-            		return true;
+            		if(CatchChance.isEggexEgg(player)) {
+            		    CatchChance.playerThrowMap.put(player.getDisplayName(),CatchChance.calculateModifierChanceModifier((player.getInventory().getItemInMainHand())));
+            		    return true;
+                    }
+            		else return false;
         		}
         	}
         }

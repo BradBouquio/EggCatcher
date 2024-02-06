@@ -11,73 +11,92 @@ PreventCatchingBabyAnimals: true
 PreventCatchingTamedAnimals: true
 PreventCatchingShearedSheeps: true
 SpawnChickenOnSuccess: false
-SpawnChickenOnFail: true
-VaultTargetBankAccount: ""
+SpawnChickenOnFail: false
+VaultTargetBankAccount: ''
 DeleteVillagerInventoryOnCatch: false
 LogEggCaptures: false
+ChanceModifier: 4.0
+SpecialEggs:
+  Tier1:
+    Name: '#990009Magic Capture Device'
+    Lore: '         #57e600Tier: 1|     #4ab347&kl#47b359&Kl#47b36c&Kl#47b37f&Kl#47b392&Kl#47b3a6&Kl#47acb3&Kl#4799b3&Kl#4786b3&Kl#4772b3&Kl#475fb3&Kl#474cb3&Kl#5647b3&Kl#6a47b3&Kl#7d47b3&Kl#9047b3&Kl#a447b3&Kl#b347ae&Kl#b3479b&Kl#b34788&Kl#b34774&Kl|#005999The capsule radiates|#005999energy that seems to|#005999pull in nearby mobs'
+  Tier2:
+    Name: '#990009Magic Capture Device'
+    Lore: '         #00e6caTier: 2|     #4ab347&kl#47b359&Kl#47b36c&Kl#47b37f&Kl#47b392&Kl#47b3a6&Kl#47acb3&Kl#4799b3&Kl#4786b3&Kl#4772b3&Kl#475fb3&Kl#474cb3&Kl#5647b3&Kl#6a47b3&Kl#7d47b3&Kl#9047b3&Kl#a447b3&Kl#b347ae&Kl#b3479b&Kl#b34788&Kl#b34774&Kl|#005999The capsule radiates|#005999energy that seems to|#005999pull in nearby mobs'
+  Tier3:
+    Name: '#990009Magic Capture Device'
+    Lore: '         #c500e6Tier: 3|     #4ab347&kl#47b359&Kl#47b36c&Kl#47b37f&Kl#47b392&Kl#47b3a6&Kl#47acb3&Kl#4799b3&Kl#4786b3&Kl#4772b3&Kl#475fb3&Kl#474cb3&Kl#5647b3&Kl#6a47b3&Kl#7d47b3&Kl#9047b3&Kl#a447b3&Kl#b347ae&Kl#b3479b&Kl#b34788&Kl#b34774&Kl|#005999The capsule radiates|#005999energy that seems to|#005999pull in nearby mobs'
+  Tier4:
+    Name: '#990009Magic Capture Device'
+    Lore: '         #ccb800Tier: 4|     #4ab347&kl#47b359&Kl#47b36c&Kl#47b37f&Kl#47b392&Kl#47b3a6&Kl#47acb3&Kl#4799b3&Kl#4786b3&Kl#4772b3&Kl#475fb3&Kl#474cb3&Kl#5647b3&Kl#6a47b3&Kl#7d47b3&Kl#9047b3&Kl#a447b3&Kl#b347ae&Kl#b3479b&Kl#b34788&Kl#b34774&Kl|#005999The capsule radiates|#005999energy that seems to|#005999pull in nearby mobs'
 CatchChance:
-  BAT: 100.0
-  BLAZE: 100.0
-  CAT: 100.0
-  CAVE_SPIDER: 100.0
-  CHICKEN: 100.0
-  COD: 100.0
-  COW: 100.0
-  CREEPER: 100.0
-  DOLPHIN: 100.0
-  DONKEY: 100.0
-  DROWNED: 100.0
-  ELDER_GUARDIAN: 100.0
-  ENDERMAN: 100.0
-  ENDERMITE: 100.0
-  EVOKER: 100.0
-  FOX: 100.0
-  GHAST: 100.0
-  GUARDIAN: 100.0
-  HORSE: 100.0
-  HUSK: 100.0
-  LLAMA: 100.0
-  MAGMA_CUBE: 100.0
-  MUSHROOM_COW: 100.0
-  MULE: 100.0
-  OCELOT: 100.0
-  PANDA: 100.0
-  PARROT: 100.0
-  PHANTOM: 100.0
-  PIG: 100.0
-  PIG_ZOMBIE: 100.0
-  PILLAGER: 100.0
-  POLAR_BEAR: 100.0
-  PUFFERFISH: 100.0
-  RABBIT: 100.0
-  RAVAGER: 100.0
-  SALMON: 100.0
-  SHEEP: 100.0
-  SHULKER: 100.0
-  SILVERFISH: 100.0
-  SKELETON_HORSE: 100.0
-  SKELETON: 100.0
-  SLIME: 100.0
-  SPIDER: 100.0
-  SQUID: 100.0
-  STRAY: 100.0
-  TRADER_LLAMA: 100.0
-  TROPICAL_FISH: 100.0
-  TURTLE: 100.0
-  VEX: 100.0
-  VILLAGER: 100.0
-  VINDICATOR: 100.0
-  WANDERING_TRADER: 100.0
-  WITCH: 100.0
-  WITHER_SKELETON: 100.0
-  WOLF: 100.0
-  ZOMBIE_HORSE: 100.0
-  ZOMBIE: 100.0
-  ZOMBIE_VILLAGER: 100.0
+  BAT: 0.3125
+  BLAZE: 0.3125
+  CAVE_SPIDER: 0.3125
+  CHICKEN: 0.3125
+  COD: 0.3125
+  COW: 0.3125
+  CREEPER: 0.078125
+  DOLPHIN: 0.3125
+  DONKEY: 0.3125
+  DROWNED: 0.3125
+  ELDER_GUARDIAN: 0.3125
+  ENDERMAN: 0.3125
+  ENDERMITE: 0.3125
+  EVOKER: 0.3125
+  GHAST: 0.3125
+  GUARDIAN: 0.3125
+  HORSE: 0.3125
+  HUSK: 0.3125
+  LLAMA: 0.3125
+  MAGMA_CUBE: 0.3125
+  MUSHROOM_COW: 0.3125
+  MULE: 0.3125
+  OCELOT: 0.3125
+  PARROT: 0.3125
+  PHANTOM: 0.3125
+  PIG: 5.0
+  POLAR_BEAR: 0.3125
+  PUFFERFISH: 0.3125
+  RABBIT: 0.3125
+  SALMON: 0.3125
+  SHEEP: 0.3125
+  SHULKER: 0.3125
+  SILVERFISH: 0.3125
+  SKELETON_HORSE: 0.3125
+  SKELETON: 0.3125
+  SLIME: 0.3125
+  SPIDER: 0.3125
+  SQUID: 0.3125
+  STRAY: 0.3125
+  TROPICAL_FISH: 0.3125
+  TURTLE: 0.3125
+  VEX: 0.3125
+  VILLAGER: 0.0
+  VINDICATOR: 0.3125
+  WITCH: 0.3125
+  WITHER_SKELETON: 0.3125
+  WOLF: 0.3125
+  ZOMBIE_HORSE: 0.3125
+  ZOMBIE: 0.3125
+  ZOMBIE_VILLAGER: 0.3125
+  CAT: 0.3125
+  ZOGLIN: 0.3125
+  FOX: 0.3125
+  PANDA: 0.3125
+  PILLAGER: 0.3125
+  RAVAGER: 0.3125
+  TRADER_LLAMA: 0.3125
+  WANDERING_TRADER: 0.3125
+  BEE: 0.3125
+  HOGLIN: 0.3125
+  PIGLIN: 0.3125
+  PIGLIN_BRUTE: 0.3125
+  ZOMBIFIED_PIGLIN: 0.3125
+  STRIDER: 0.3125
 VaultCost:
   BAT: 0.0
   BLAZE: 0.0
-  CAT: 100.0
   CAVE_SPIDER: 0.0
   CHICKEN: 0.0
   COD: 0.0
@@ -90,7 +109,6 @@ VaultCost:
   ENDERMAN: 0.0
   ENDERMITE: 0.0
   EVOKER: 0.0
-  FOX: 0.0
   GHAST: 0.0
   GUARDIAN: 0.0
   HORSE: 0.0
@@ -100,16 +118,12 @@ VaultCost:
   MUSHROOM_COW: 0.0
   MULE: 0.0
   OCELOT: 0.0
-  PANDA: 0.0
   PARROT: 0.0
   PHANTOM: 0.0
   PIG: 0.0
-  PIG_ZOMBIE: 0.0
-  PILLAGER: 0.0
   POLAR_BEAR: 0.0
   PUFFERFISH: 0.0
   RABBIT: 0.0
-  RAVAGER: 0.0
   SALMON: 0.0
   SHEEP: 0.0
   SHULKER: 0.0
@@ -120,84 +134,101 @@ VaultCost:
   SPIDER: 0.0
   SQUID: 0.0
   STRAY: 0.0
-  TRADER_LLAMA: 0.0
   TROPICAL_FISH: 0.0
   TURTLE: 0.0
   VEX: 0.0
   VILLAGER: 0.0
   VINDICATOR: 0.0
-  WANDERING_TRADER: 0.0
   WITCH: 0.0
   WITHER_SKELETON: 0.0
   WOLF: 0.0
   ZOMBIE_HORSE: 0.0
   ZOMBIE: 0.0
   ZOMBIE_VILLAGER: 0.0
+  CAT: 0.0
+  ZOGLIN: 0.0
+  FOX: 0.0
+  PANDA: 0.0
+  PILLAGER: 0.0
+  RAVAGER: 0.0
+  TRADER_LLAMA: 0.0
+  WANDERING_TRADER: 0.0
+  BEE: 0.0
+  HOGLIN: 0.0
+  PIGLIN: 0.0
+  PIGLIN_BRUTE: 0.0
+  ZOMBIFIED_PIGLIN: 0.0
+  STRIDER: 0.0
 ItemCost:
-  ItemName: GOLD_NUGGET
+  ItemName: EMERALD
   Amount:
-    BAT: 0
-    BLAZE: 0
-    CAT: 100.0
-    CAVE_SPIDER: 0
-    CHICKEN: 0
-    COD: 0
-    COW: 0
-    CREEPER: 0
-    DOLPHIN: 0
-    DONKEY: 0
-    DROWNED: 0
-    ELDER_GUARDIAN: 0
-    ENDERMAN: 0
-    ENDERMITE: 0
-    EVOKER: 0
-    FOX: 0
-    GHAST: 0
-    GUARDIAN: 0
-    HORSE: 0
-    HUSK: 0
-    LLAMA: 0
-    MAGMA_CUBE: 0
-    MUSHROOM_COW: 0
-    MULE: 0
-    OCELOT: 0
-    PANDA: 0
-    PARROT: 0
-    PHANTOM: 0
-    PIG: 0
-    PIG_ZOMBIE: 0
-    PILLAGER: 0
-    POLAR_BEAR: 0
-    PUFFERFISH: 0
-    RABBIT: 0
-    RAVAGER: 0
-    SALMON: 0
-    SHEEP: 0
-    SHULKER: 0
-    SILVERFISH: 0
-    SKELETON_HORSE: 0
-    SKELETON: 0
-    SLIME: 0
-    SPIDER: 0
-    SQUID: 0
-    STRAY: 0
-    TRADER_LLAMA: 0
-    TROPICAL_FISH: 0
-    TURTLE: 0
-    VEX: 0
-    VILLAGER: 0
-    VINDICATOR: 0
-    WANDERING_TRADER: 0
-    WITCH: 0
-    WITHER_SKELETON: 0
-    WOLF: 0
-    ZOMBIE_HORSE: 0
-    ZOMBIE: 0
-    ZOMBIE_VILLAGER: 0
-HealthPercentage:
+    BAT: 60
+    BLAZE: 90
+    CAVE_SPIDER: 30
+    CHICKEN: 20
+    COD: 50
+    COW: 30
+    CREEPER: 50
+    DOLPHIN: 70
+    DONKEY: 30
+    DROWNED: 70
+    ELDER_GUARDIAN: 100
+    ENDERMAN: 80
+    ENDERMITE: 80
+    EVOKER: 90
+    GHAST: 30
+    GUARDIAN: 100
+    HORSE: 20
+    HUSK: 40
+    LLAMA: 40
+    MAGMA_CUBE: 60
+    MUSHROOM_COW: 50
+    MULE: 40
+    OCELOT: 40
+    PARROT: 50
+    PHANTOM: 90
+    PIG: 10
+    POLAR_BEAR: 20
+    PUFFERFISH: 70
+    RABBIT: 20
+    SALMON: 20
+    SHEEP: 30
+    SHULKER: 80
+    SILVERFISH: 10
+    SKELETON_HORSE: 60
+    SKELETON: 40
+    SLIME: 50
+    SPIDER: 30
+    SQUID: 70
+    STRAY: 80
+    TROPICAL_FISH: 70
+    TURTLE: 70
+    VEX: 80
+    VILLAGER: 200
+    VINDICATOR: 90
+    WITCH: 40
+    WITHER_SKELETON: 60
+    WOLF: 80
+    ZOMBIE_HORSE: 50
+    ZOMBIE: 10
+    ZOMBIE_VILLAGER: 150
+    CAT: 20
+    ZOGLIN: 40
+    FOX: 20
+    PANDA: 50
+    PILLAGER: 90
+    RAVAGER: 1000
+    TRADER_LLAMA: 200
+    WANDERING_TRADER: 9000
+    BEE: 40
+    HOGLIN: 70
+    PIGLIN: 50
+    PIGLIN_BRUTE: 60
+    ZOMBIFIED_PIGLIN: 80
+    STRIDER: 70.0
+HEALTHPERCENTAGE:
   BAT: 100.0
   BLAZE: 100.0
-  CAT: 100.0
   CAVE_SPIDER: 100.0
   CHICKEN: 100.0
   COD: 100.0
@@ -210,7 +241,6 @@ HealthPercentage:
   ENDERMAN: 100.0
   ENDERMITE: 100.0
   EVOKER: 100.0
-  FOX: 100.0
   GHAST: 100.0
   GUARDIAN: 100.0
   HORSE: 100.0
@@ -220,16 +250,12 @@ HealthPercentage:
   MUSHROOM_COW: 100.0
   MULE: 100.0
   OCELOT: 100.0
-  PANDA: 100.0
   PARROT: 100.0
   PHANTOM: 100.0
   PIG: 100.0
-  PIG_ZOMBIE: 100.0
-  PILLAGER: 100.0
   POLAR_BEAR: 100.0
   PUFFERFISH: 100.0
   RABBIT: 100.0
-  RAVAGER: 100.0
   SALMON: 100.0
   SHEEP: 100.0
   SHULKER: 100.0
@@ -240,26 +266,39 @@ HealthPercentage:
   SPIDER: 100.0
   SQUID: 100.0
   STRAY: 100.0
-  TRADER_LLAMA: 100.0
   TROPICAL_FISH: 100.0
   TURTLE: 100.0
   VEX: 100.0
   VILLAGER: 100.0
   VINDICATOR: 100.0
-  WANDERING_TRADER: 100.0
   WITCH: 100.0
   WITHER_SKELETON: 100.0
   WOLF: 100.0
   ZOMBIE_HORSE: 100.0
   ZOMBIE: 100.0
   ZOMBIE_VILLAGER: 100.0
+  CAT: 100.0
+  ZOGLIN: 100.0
+  FOX: 100.0
+  PANDA: 100.0
+  PILLAGER: 100.0
+  RAVAGER: 100.0
+  TRADER_LLAMA: 100.0
+  WANDERING_TRADER: 100.0
+  BEE: 100.0
+  HOGLIN: 100.0
+  PIGLIN: 100.0
+  PIGLIN_BRUTE: 100.0
+  ZOMBIFIED_PIGLIN: 100.0
+  STRIDER: 100.0
 Messages:
-  PermissionFail: "You do not have permission to catch this mob!"
-  VaultFail: "It costs %s dollars to catch this mob!"
-  VaultSuccess: "You paid %s dollars for catching this mob!"
-  ItemCostFail: "It costs %s gold nugget(s) to catch this mob!"
-  ItemCostSuccess: "You paid %s gold nugget(s) for catching this mob!"
-  CatchChanceFail: "You failed to catch this mob!"
-  CatchChanceSuccess: ""
-  HealthPercentageFail: "The mob has more than %s percent health left and cannot be caught!"
+  PermissionFail: You do not have permission to catch this mob!
+  VaultFail: It costs %s dollars to catch this mob!
+  VaultSuccess: You paid %s dollars for catching this mob!
+  ItemCostFail: '#990093You need %s emerald(s) to catch this mob!'
+  ItemCostSuccess: '#990093Success! You paid %s emerald(s) for catching this mob!'
+  CatchChanceFail: '&cThe creature broke free!'
+  CatchChanceSuccess: '&f[#5ce6d5MSCapture&f] #990093Success! You captured a #007499%s'
+  HealthPercentageFail: The mob has more than %s percent health left and cannot be
+    caught!
 ConfigVersion: 4.0
